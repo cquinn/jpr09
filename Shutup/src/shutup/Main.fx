@@ -47,12 +47,30 @@ description = formatter.format(left.toDate());
 
 };
 var description;
-def MAX = 5m;
+def MAX = 9m + 59s;
 left = MAX;
 
 var color = Color.WHITE;
 var fgcolor = Color.BLACK;
 var y = 300;
+var blink = Timeline {
+    repeatCount: Timeline.INDEFINITE
+    keyFrames: [
+        KeyFrame {
+            time: 500ms
+            values: color => Color.RED
+        }
+        KeyFrame {
+            time: 1s
+            values: color => Color.WHITE
+        }
+        KeyFrame {
+            time: 1500ms
+            values: color => Color.RED
+        }
+    ]
+}
+
 
 var startButton: Button = Button {
     text: "Start"
@@ -81,6 +99,7 @@ var stopButton: Button = Button {
         //stopButton.fadeout();
         startButton.fadein();
         player.stop();
+        blink.stop();
     }
 }
 
@@ -96,24 +115,24 @@ var resetButton: Button = Button {
     }
 }
 
+var text = Text {
+    font: f
+    x: w / 2 - 150,
+    y: h / 2 - 30
+    stroke: bind fgcolor
+    fill: bind fgcolor
+    content: bind description
+}
 
 Stage {
     title: "STFU"
     width: w
     height: h
-    fullScreen: true
+    fullScreen: false
     scene: Scene {
         fill: bind color
         content: [
-            Text {
-                font: f
-                x: w / 2 - 150,
-                y: h / 2 - 30
-                stroke: bind fgcolor
-                fill: bind fgcolor
-                content: bind description
-            }
-
+            text,
             startButton,
             stopButton,
             resetButton
@@ -148,18 +167,17 @@ var colortime: Timeline = Timeline {
                 fgcolor => Color.BLACK ]
         },
         KeyFrame {
-            time: MAX-1m
-            values: [ color => Color
-                .WHITE,
+            time: MAX - 1m
+            values: [ color => Color.WHITE,
                 fgcolor => Color.BLACK ]
         },
         KeyFrame {
-            time: MAX-30s
+            time: MAX - 30s
             values: [ color => Color.YELLOW,
                 fgcolor => Color.BLACK ]
         },
         KeyFrame {
-            time: MAX-1s
+            time: MAX - 1s
             values: [ color => Color.RED,
                 fgcolor => Color.BLACK ]
         }
@@ -171,23 +189,6 @@ var colortime: Timeline = Timeline {
                 time.stop();
                 description = "STFU!";
                 colortime.stop();
-                var blink = Timeline {
-                    repeatCount: Timeline.INDEFINITE
-                    keyFrames: [
-                        KeyFrame {
-                            time: 50ms
-                            action: function() {
-                                if (color == Color.RED) {
-                                    color = Color.WHITE;
-                                    fgcolor = Color.BLACK;
-                                } else {
-                                    color = Color.RED;
-                                    fgcolor = Color.BLACK;
-                                }
-                            }
-                        }
-                    ]
-                }
                 blink.play();
             }
         }
