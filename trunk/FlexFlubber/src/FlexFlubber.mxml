@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="288" height="471" xmlns:local="*">
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="288" height="471" minWidth="300" minHeight="300" xmlns:local="*" backgroundColor="#000000" showStatusBar="false">
     <mx:Script>
     	<![CDATA[
     		import flash.net.navigateToURL;
@@ -21,7 +21,7 @@
 				var currentDate:Date = new Date()
 				var millis:Number = currentDate.time - startTime
 				
-				elapsedTimeLabel.text = elapsedFormatter.format(millis)  		
+				elapsedTimeLabel.text = elapsedFormatter.format(millis)
     		}
     		
     		private function stopButtonPressed() : void {
@@ -37,15 +37,39 @@
     			currentLabel++
     			
     			flubListArea.text += newFlubLine
+    			flubListArea.verticalScrollPosition = flubListArea.maxVerticalScrollPosition
     		}
     	]]>
     </mx:Script>
+    <mx:Style>
+    	Button {
+    		skin: ClassReference("ButtonSkin");
+    		color: #909090;
+    		textRollOverColor: #dddddd;
+    		textSelectedColor: #dddddd;
+    		disabled-color: #606060;
+    	}
+    	
+    	ScrollBar {
+    		up-arrow-skin: ClassReference(null);
+    		down-arrow-skin: ClassReference(null);
+			track-skin: ClassReference(null);
+    		thumb-skin: ClassReference("ButtonSkin");
+    	}
+    	  	
+    </mx:Style>
     <local:DurationFormatter id="elapsedFormatter"/>
-	<mx:Label id="elapsedTimeLabel" text="00:00" height="50" fontSize="32" textAlign="center" left="10" right="10" top="10"/>
+    <mx:Glow id="flubButtonGlow" duration="{running ? 650 : 0}" color="red" blurXFrom="40" blurYFrom="40"/>
+	<mx:TextInput id="elapsedTimeLabel" text="00:00" height="50" fontSize="32" textAlign="center" left="10" right="10" top="10"
+		color="#dddddd" editable="false" focusEnabled="false" backgroundColor="#151515" borderStyle="solid" borderColor="#252525"
+		cornerRadius="10"/>
 	<mx:Button label="Start" left="10" top="68" id="startButton" click="startButtonPressed()" enabled="{!running}"/>
 	<mx:Button label="Stop" id="stopButton" right="10" top="68" enabled="{running}" click="stopButtonPressed()"/>
-	<mx:Button label="FLUB!" height="79" left="10" right="10" top="98" id="flubButton" fontSize="32" enabled="{running}" click="flubButtonPressed()"/>
-	<mx:TextArea top="185" bottom="40" left="10" right="10" id="flubListArea"/>
+	<mx:Button label="FLUB!" height="79" left="10" right="10" top="98" id="flubButton" fontSize="32" 
+		enabled="{running}" click="flubButtonPressed()" mouseUpEffect="{flubButtonGlow}" themeColor="red" highlightAlphas="[0.6,0.6]"
+		cornerRadius="10"/>
+	<mx:TextArea top="185" bottom="40" left="10" right="10" id="flubListArea" backgroundColor="#151515" borderStyle="solid" 
+		borderColor="#252525" color="#dddddd" cornerRadius="10" focusThickness="0"/>
 	<mx:Button label="Save" bottom="10" left="10" id="saveButton">
 		<mx:click>
 			<![CDATA[
