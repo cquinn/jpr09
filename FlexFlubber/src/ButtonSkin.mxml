@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<degrafa:Surface xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:effects="com.darronschall.effects.*" xmlns:degrafa="http://www.degrafa.com/2007">
+
+  <mx:Script>
+  import mx.controls.scrollClasses.ScrollBar;
+  
+  // work around the lack of percentage based width / height in Degrafa
+  override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+  {
+    super.updateDisplayList(unscaledWidth, unscaledHeight);
+    rWidth = unscaledWidth;
+    rHeight = unscaledHeight;
+  }
+  
+    override public function get measuredWidth():Number
+	{
+	    return ScrollBar.THICKNESS;
+	}
+	
+	override public function get measuredHeight():Number
+	{
+	    return ScrollBar.THICKNESS;
+	}
+  </mx:Script>
+
+  <mx:Number id="rWidth">0</mx:Number>
+  <mx:Number id="rHeight">0</mx:Number>
+
+  <mx:Number id="outerBorderColor"/>
+  <mx:Number id="innerBorderColorTop"/>
+  <mx:Number id="innerBorderColorBottom"/>
+  <mx:Number id="fillColorTop"/>
+  <mx:Number id="fillColorBottom"/>
+  
+  <mx:Parallel id="parallelTransition">
+    <effects:AnimateColor target="{this}" property="outerBorderColor" duration="650"/>
+    <effects:AnimateColor target="{this}" property="innerBorderColorTop" duration="650"/>
+    <effects:AnimateColor target="{this}" property="innerBorderColorBottom" duration="650"/>
+    <effects:AnimateColor target="{this}" property="fillColorTop" duration="650"/>
+    <effects:AnimateColor target="{this}" property="fillColorBottom" duration="650"/>
+  </mx:Parallel>
+
+  <degrafa:graphicsData>
+    <degrafa:GeometryGroup>
+      <degrafa:RoundedRectangle width="{rWidth}" height="{rHeight}" cornerRadius="10">
+        <degrafa:stroke>
+          <degrafa:SolidStroke alpha="1" color="{outerBorderColor}" pixelHinting="true"/>
+        </degrafa:stroke>
+        <degrafa:fill>
+          <degrafa:GradientFill angle="90">
+            <degrafa:GradientStop ratio="0" alpha="1" color="{innerBorderColorTop}"/>
+            <degrafa:GradientStop ratio="1" alpha="1" color="{innerBorderColorBottom}"/>
+          </degrafa:GradientFill>
+        </degrafa:fill>
+      </degrafa:RoundedRectangle>
+      <degrafa:RoundedRectangle x="2" y="2" width="{rWidth - 3}" height="{rHeight - 3}" cornerRadius="10">
+        <degrafa:fill>
+          <degrafa:GradientFill angle="90">
+            <degrafa:GradientStop ratio="0" alpha="1" color="{fillColorTop}"/>
+            <degrafa:GradientStop ratio="1" alpha="1" color="{fillColorBottom}"/>
+          </degrafa:GradientFill>
+        </degrafa:fill>
+      </degrafa:RoundedRectangle>
+    </degrafa:GeometryGroup>
+  </degrafa:graphicsData>
+    
+  <degrafa:states>
+    <mx:State name="up">
+      <mx:SetProperty name="outerBorderColor" value="0x252525"/>
+      <mx:SetProperty name="innerBorderColorTop" value="0x141414"/>
+      <mx:SetProperty name="innerBorderColorBottom" value="0x0b0b0b"/>
+      <mx:SetProperty name="fillColorTop" value="0x393939"/>
+      <mx:SetProperty name="fillColorBottom" value="0x131313"/>
+    </mx:State>
+    <mx:State name="over">
+      <mx:SetProperty name="outerBorderColor" value="0x252525"/>
+      <mx:SetProperty name="innerBorderColorTop" value="0x141414"/>
+      <mx:SetProperty name="innerBorderColorBottom" value="0x0b0b0b"/>
+      <mx:SetProperty name="fillColorTop" value="0x161616"/>
+      <mx:SetProperty name="fillColorBottom" value="0x161616"/>          
+    </mx:State>
+    <mx:State name="down">
+      <mx:SetProperty name="outerBorderColor" value="0x252525"/>
+      <mx:SetProperty name="innerBorderColorTop" value="0x0b0b0b"/>
+      <mx:SetProperty name="innerBorderColorBottom" value="0x0b0b0b"/>
+      <mx:SetProperty name="fillColorTop" value="0x0b0b0b"/>
+      <mx:SetProperty name="fillColorBottom" value="0x0b0b0b"/>    
+    </mx:State>
+	<mx:State name="disabled">
+      <mx:SetProperty name="outerBorderColor" value="0x151515"/>
+      <mx:SetProperty name="innerBorderColorTop" value="0x0b0b0b"/>
+      <mx:SetProperty name="innerBorderColorBottom" value="0x0b0b0b"/>
+      <mx:SetProperty name="fillColorTop" value="0x0b0b0b"/>
+      <mx:SetProperty name="fillColorBottom" value="0x0b0b0b"/>    
+	</mx:State>
+  </degrafa:states>
+
+  <degrafa:transitions>
+    <mx:Transition fromState="up" toState="over" effect="{parallelTransition}"/>
+    <mx:Transition fromState="over" toState="up" effect="{parallelTransition}"/>
+    <mx:Transition fromState="down" toState="up" effect="{parallelTransition}"/>
+    <mx:Transition fromState="down" toState="over" effect="{parallelTransition}"/>
+    <mx:Transition fromState="up" toState="disabled" effect="{parallelTransition}"/>
+    <mx:Transition fromState="disabled" toState="up" effect="{parallelTransition}"/>
+  </degrafa:transitions>
+    
+</degrafa:Surface>
