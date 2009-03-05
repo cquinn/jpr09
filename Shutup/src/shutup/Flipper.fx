@@ -163,6 +163,13 @@ public class Flipper extends CustomNode {
             content: [
                 Rectangle {
                     x: bind x
+                    y: bind y-height
+                    width: bind width
+                    height: bind height
+                    fill: Color.GOLD
+                },
+                Rectangle {
+                    x: bind x
                     y: bind y
                     width: bind width
                     height: bind height
