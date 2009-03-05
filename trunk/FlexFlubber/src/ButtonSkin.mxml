@@ -47,18 +47,18 @@
           <degrafa:SolidStroke alpha="1" color="{outerBorderColor}" pixelHinting="true"/>
         </degrafa:stroke>
         <degrafa:fill>
-          <degrafa:GradientFill angle="90">
+          <degrafa:LinearGradientFill angle="90">
             <degrafa:GradientStop ratio="0" alpha="1" color="{innerBorderColorTop}"/>
             <degrafa:GradientStop ratio="1" alpha="1" color="{innerBorderColorBottom}"/>
-          </degrafa:GradientFill>
+          </degrafa:LinearGradientFill>
         </degrafa:fill>
       </degrafa:RoundedRectangle>
       <degrafa:RoundedRectangle x="2" y="2" width="{rWidth - 3}" height="{rHeight - 3}" cornerRadius="10">
         <degrafa:fill>
-          <degrafa:GradientFill angle="90">
+          <degrafa:LinearGradientFill angle="90">
             <degrafa:GradientStop ratio="0" alpha="1" color="{fillColorTop}"/>
             <degrafa:GradientStop ratio="1" alpha="1" color="{fillColorBottom}"/>
-          </degrafa:GradientFill>
+          </degrafa:LinearGradientFill>
         </degrafa:fill>
       </degrafa:RoundedRectangle>
     </degrafa:GeometryGroup>
