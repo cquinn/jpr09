@@ -9,3 +9,67 @@ ScrollBar {
 	track-skin: ClassReference(null);
 	thumb-skin: ClassReference("ButtonSkin");
 }
+
+TextArea {
+  top: 330;
+  bottom: 155;
+  left: 27;
+  right: 29;
+  color: #dddddd;
+  focusThickness: 0;
+  alpha: 0;
+  backgroundAlpha: 0;
+  borderStyle: none;
+}
+
+.startButton {
+  left: 43;
+  top: 507;
+  right: 219;
+  bottom: 91;
+  skin: Embed("startButton.png");
+  label-size-limit: 0;
+}
+
+.flubButton {
+  left: 129;
+  top: 507;
+  right: 133;
+  bottom: 91;
+  skin: Embed("flubButton.png");
+}
+
+.stopButton {
+  left: 216;
+  top: 507;
+  right: 66;
+  bottom: 91;
+  skin: Embed("stopButton.png");
+}
+
+.saveButton {
+  left: 25;
+  top: 597;
+  right: 264;
+  bottom: 28;
+  skin: Embed("saveButton.png");
+  overSkin: Embed("saveOverButton.png");
+}
+
+.emailButton {
+  left: 145;
+  top: 597;
+  right: 144;
+  bottom: 28;
+  skin: Embed("mailButton.png");
+  overSkin: Embed("mailOverButton.png");
+}
+
+.clearButton {
+  left: 261;
+  top: 596;
+  right: 28;
+  bottom: 28;
+  skin: Embed("clearButton.png");
+  overSkin: Embed("clearOverButton.png");
+}

@@ -18,10 +18,10 @@
     		}
     		
     		private function updateTime(event:TimerEvent) : void {
-				var currentDate:Date = new Date()
-				var millis:Number = currentDate.time - startTime
-				
-				elapsedTimeLabel.text = elapsedFormatter.format(millis)
+  				var currentDate:Date = new Date()
+  				var millis:Number = currentDate.time - startTime
+  				
+  				elapsedTimeLabel.text = elapsedFormatter.format(millis)
     		}
     		
     		private function stopButtonPressed() : void {

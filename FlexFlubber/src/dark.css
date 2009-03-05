@@ -1,0 +1,101 @@
+WindowedApplication {
+    backgroundColor: #000000;
+    backgroundImage: null;
+}
+
+Button {
+		skin: ClassReference("ButtonSkin");
+		color: #909090;
+		textRollOverColor: #dddddd;
+		textSelectedColor: #dddddd;
+		disabled-color: #606060;
+}
+
+TextInput {
+    fontSize: 32;
+    textAlign: center;
+    left: 10;
+    right: 10;
+    top: 10;
+		color: #dddddd;
+		editable: false;
+		focusEnabled: false;
+		backgroundColor: #151515;
+		borderStyle: solid;
+		borderColor: #252525;
+		cornerRadius: 10;
+}
+
+TextArea {
+  top: 185;
+  bottom: 40;
+  left: 10;
+  right: 10;
+  backgroundColor: #151515;
+  borderStyle: solid;
+  borderColor: #252525;
+  color: #dddddd;
+  cornerRadius: 10;
+  focusThickness: 0;
+}
+
+ScrollBar {
+    up-arrow-skin: ClassReference(null);
+    down-arrow-skin: ClassReference(null);
+		track-skin: ClassReference(null);
+    thumb-skin: ClassReference("ButtonSkin");
+}
+    	
+.startButton {
+    left: 10;
+    top: 68;
+    right: 251;
+    bottom: 559;
+    skin: ClassReference("ButtonSkin");
+}
+
+.stopButton {
+    right: 10;
+    top: 68;
+    left: 251;
+    bottom: 559;
+    skin: ClassReference("ButtonSkin");
+}
+
+.flubButton {
+    left: 10;
+    right: 10;
+    top: 98;
+    bottom: 470;
+    fontSize: 32;
+    themeColor: red;
+    highlightAlphas: 0.6, 06;
+    cornerRadius: 10;
+    skin: ClassReference("ButtonSkin");
+}
+
+.saveButton {
+  bottom: 10;
+  left: 10;
+  top: 617;
+  right: 241;
+  skin: ClassReference("ButtonSkin");
+  overSkin: ClassReference("ButtonSkin");
+}
+
+.emailButton {
+  horizontalCenter: 0;
+  bottom: 10;
+  top: 617;
+  skin: ClassReference("ButtonSkin");
+  overSkin: ClassReference("ButtonSkin");
+}
+
+.clearButton {
+  right: 10;
+  bottom: 10;
+  top: 617;
+  left: 241;
+  skin: ClassReference("ButtonSkin");
+  overSkin: ClassReference("ButtonSkin");
+}
