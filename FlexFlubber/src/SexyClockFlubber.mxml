@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:local="*" showStatusBar="false" maxWidth="311" maxHeight="647" minWidth="311" minHeight="647">
+  
+  
+  <mx:Style source="sexy.css"/>
+  
+      <mx:Script>
+    	<![CDATA[
+    		import flash.net.navigateToURL;
+    		private var startTime:Number
+    		private var timer:Timer
+    		private var currentLabel:uint
+    		[Bindable] private var running:Boolean = false;
+    		
+    		private function startButtonPressed() : void {
+    			startTime = new Date().time
+    			timer = new Timer(100)
+    			timer.addEventListener(TimerEvent.TIMER, updateTime)
+    			timer.start()
+    			running = true
+    			currentLabel = 1
+    		}
+    		
+    		private function updateTime(event:TimerEvent) : void {
+				var currentDate:Date = new Date()
+				var millis:Number = currentDate.time - startTime
+				
+				//elapsedTimeLabel.text = elapsedFormatter.format(millis)
+    		}
+    		
+    		private function stopButtonPressed() : void {
+    			timer.stop()
+    			running = false
+    		}
+    		
+    		private function flubButtonPressed() : void {
+    			var currentDate:Date = new Date()
+    			var millis:Number = currentDate.time - startTime
+    			
+    			var newFlubLine:String = "" + millis/1000 + "\t" + millis/1000 + "\t" + currentLabel + "\n"
+    			currentLabel++
+    			
+    			flubListArea.text += newFlubLine
+    			flubListArea.verticalScrollPosition = flubListArea.maxVerticalScrollPosition
+    		}
+    	]]>
+    </mx:Script>
+
+  <local:DurationFormatter id="elapsedFormatter"/>
+  <!--
+	<mx:TextInput id="elapsedTimeLabel" text="00:00" height="50" fontSize="32" textAlign="center" left="10" right="10" top="10"
+		color="#dddddd" editable="false" focusEnabled="false" backgroundColor="#151515" borderStyle="solid" borderColor="#252525"
+		cornerRadius="10"/>
+  -->
+	<mx:Button id="startButton" toolTip="Start" left="43" top="507" width="49" height="49"
+	  skin="@Embed('startButton.png')"
+	  click="startButtonPressed()" enabled="{!running}"/>
+		
+	<mx:Button id="flubButton" toolTip="FLUB!" left="129" top="507" width="49" height="49"
+	  skin="@Embed('flubButton.png')"
+		enabled="{running}" click="flubButtonPressed()"/>
+
+	<mx:Button id="stopButton" toolTip="Stop" left="216" top="507" width="49" height="49"
+	  skin="@Embed('stopButton.png')"
+	  enabled="{running}" click="stopButtonPressed()"/>
+		
+	<mx:TextArea id="flubListArea" top="330" bottom="155" left="27" right="29"
+		color="#dddddd" focusThickness="0" alpha="0"/>
+		
+	<mx:Button id="saveButton" toolTip="Save" left="25" top="597" width="22" height="22"
+	  skin="@Embed('saveButton.png')" overSkin="@Embed('saveOverButton.png')">
+		<mx:click>
+			<![CDATA[
+				var f:File = File.desktopDirectory
+				f.browseForSave("Save Flubs As")
+				f.addEventListener(Event.SELECT, function(event:Event) : void {
+					var stream:FileStream = new FileStream()
+					stream.open((event.target as File), FileMode.WRITE)
+					stream.writeUTFBytes(flubListArea.text)
+					stream.close()
+				});
+			]]>
+		</mx:click>
+	</mx:Button>
+	
+	<mx:Button id="emailButton" toolTip="Email" left="145" top="597" width="22" height="22"
+	  skin="@Embed('mailButton.png')" overSkin="@Embed('mailOverButton.png')"
+	  click="navigateToURL(new URLRequest('mailto:?subject=flubs&amp;body='+flubListArea.text))"/>
+	
+	<mx:Button id="clearButton" toolTip="Clear" left="261" top="596" width="22" height="22"
+	  skin="@Embed('clearButton.png')" overSkin="@Embed('clearOverButton.png')">
+		<mx:click>
+			<![CDATA[
+				flubListArea.text = ""
+				stopButtonPressed()
+				//elapsedTimeLabel.text = "00:00"
+			]]>
+		</mx:click>
+	</mx:Button>
+  
+</mx:WindowedApplication>

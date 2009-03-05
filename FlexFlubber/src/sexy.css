@@ -1,0 +1,11 @@
+/* CSS file */
+WindowedApplication {
+  background-image: Embed(source="background.jpg");
+}
+
+ScrollBar {
+	up-arrow-skin: ClassReference(null);
+	down-arrow-skin: ClassReference(null);
+	track-skin: ClassReference(null);
+	thumb-skin: ClassReference("ButtonSkin");
+}
