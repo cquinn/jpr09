@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:degrafa="http://www.degrafa.com/2007" xmlns:local="*"
+  layout="absolute" showStatusBar="false" maxWidth="311" maxHeight="647" minWidth="311" minHeight="647"
+  doubleClickEnabled="true" doubleClick="isDefaultSkin = !isDefaultSkin"
+  creationComplete="isDefaultSkin = true">
+
+  <mx:Script>
+    	<![CDATA[
+    		import flash.net.navigateToURL;
+    		
+    		private var startTime:Number
+    		private var timer:Timer
+    		private var currentLabel:uint
+    		[Bindable]
+    		private var running:Boolean = false;
+    		
+    		private var _isDefaultSkin:Boolean;
+    		
+    		[Bindable]
+    		private function set isDefaultSkin(value:Boolean):void {
+    		  _isDefaultSkin = value;
+          
+          if (isDefaultSkin) {
+    		    StyleManager.loadStyleDeclarations("dark.swf");
+    		  }
+    		  else {
+    		    StyleManager.loadStyleDeclarations("sexy.swf");
+    		  }
+    		}
+    		private function get isDefaultSkin():Boolean {
+    		  return _isDefaultSkin;
+    		}
+    		
+    		private function startButtonPressed() : void {
+    			startTime = new Date().time
+    			timer = new Timer(100)
+    			timer.addEventListener(TimerEvent.TIMER, updateTime)
+    			timer.start()
+    			running = true
+    			currentLabel = 1
+    		}
+    		
+    		private function updateTime(event:TimerEvent) : void {
+  				var currentDate:Date = new Date()
+  				var millis:Number = currentDate.time - startTime
+  				
+  				var curSeconds:Number = (millis % 60000) / 1000;
+  				var curMinutes:int = millis / 60000;
+
+				  elapsedTimeLabel.text = elapsedFormatter.format(millis)
+          secondHand.rotation = -90 + (curSeconds * (360 / 60));
+          minuteHand.rotation = -90 + (curMinutes * (360 / 100));
+    		}
+    		
+    		private function stopButtonPressed() : void {
+    		  if (timer != null) {
+    			  timer.stop()
+    			}
+    			running = false
+    		}
+    		
+    		private function flubButtonPressed() : void {
+    			var currentDate:Date = new Date()
+    			var millis:Number = currentDate.time - startTime
+    			
+    			var newFlubLine:String = "" + millis/1000 + "\t" + millis/1000 + "\t" + currentLabel + "\n"
+    			currentLabel++
+    			
+    			flubListArea.text += newFlubLine
+    			flubListArea.verticalScrollPosition = flubListArea.maxVerticalScrollPosition
+    		}
+    	]]>
+  </mx:Script>
+  
+  <local:DurationFormatter id="elapsedFormatter"/>
+  
+  <mx:Glow id="flubButtonGlow" duration="{running ? 650 : 0}" color="red" blurXFrom="40" blurYFrom="40"/>
+  
+	<mx:TextInput id="elapsedTimeLabel" text="00:00" visible="{isDefaultSkin}" height="50"/>
+  
+  <degrafa:Surface x="0" y="0" visible="{!isDefaultSkin}">
+  
+    <degrafa:filters>
+      <mx:DropShadowFilter/>
+    </degrafa:filters>
+  
+    <degrafa:strokes>
+      <degrafa:SolidStroke id="largeStroke" color="#444" weight="3" caps="none"/>
+      <degrafa:SolidStroke id="smallStroke" color="#333" weight="2" caps="none"/>
+    </degrafa:strokes>
+  
+    <degrafa:GeometryGroup id="minuteHand" x="162" y="162" rotation="-90">
+      <degrafa:HorizontalLine x="0" x1="100" y="0" stroke="{largeStroke}"/>
+    </degrafa:GeometryGroup>
+    
+    <degrafa:GeometryGroup id="secondHand" x="203" y="189" rotation="-90">
+      <degrafa:HorizontalLine x="0" x1="20" y="0" stroke="{smallStroke}"/>
+    </degrafa:GeometryGroup>
+    
+  </degrafa:Surface>
+  
+	<mx:Button id="startButton" label="{isDefaultSkin ? 'Start' : ''}" toolTip="Start" styleName="startButton" click="startButtonPressed()" enabled="{!running}"/>
+  
+	<mx:Button id="flubButton" label="{isDefaultSkin ? 'FLUB!' : ''}" toolTip="FLUB!" styleName="flubButton" enabled="{running}" click="flubButtonPressed()"/>
+
+	<mx:Button id="stopButton" label="{isDefaultSkin ? 'Stop' : ''}" toolTip="Stop" styleName="stopButton" enabled="{running}" click="stopButtonPressed()"/>
+		
+	<mx:TextArea id="flubListArea"/>
+		
+	<mx:Button id="saveButton" label="{isDefaultSkin ? 'Save' : ''}" toolTip="Save" styleName="saveButton" >
+		<mx:click>
+			<![CDATA[
+				var f:File = File.desktopDirectory
+				f.browseForSave("Save Flubs As")
+				f.addEventListener(Event.SELECT, function(event:Event) : void {
+					var stream:FileStream = new FileStream()
+					stream.open((event.target as File), FileMode.WRITE)
+					stream.writeUTFBytes(flubListArea.text)
+					stream.close()
+				});
+			]]>
+		</mx:click>
+	</mx:Button>
+	
+	<mx:Button id="emailButton" label="{isDefaultSkin ? 'Email' : ''}" toolTip="Email" styleName="emailButton" click="navigateToURL(new URLRequest('mailto:?subject=flubs&amp;body='+flubListArea.text))"/>
+	
+	<mx:Button id="clearButton" label="{isDefaultSkin ? 'Clear' : ''}" toolTip="Clear" styleName="clearButton">
+		<mx:click>
+			<![CDATA[
+				flubListArea.text = ""
+				stopButtonPressed()
+				
+			  elapsedTimeLabel.text = "00:00"
+
+			  secondHand.rotation = -90
+			  minuteHand.rotation = -90
+			]]>
+		</mx:click>
+	</mx:Button>
+	
+</mx:WindowedApplication>

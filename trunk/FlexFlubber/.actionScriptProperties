@@ -11,7 +11,11 @@
   <applications>
     <application path="FlexFlubber.mxml"/>
     <application path="SexyClockFlubber.mxml"/>
+    <application path="FlexibleFlub.mxml"/>
   </applications>
   <modules/>
-  <buildCSSFiles/>
+  <buildCSSFiles>
+    <buildCSSFileEntry destPath="bin-debug" sourcePath="src/dark.css"/>
+    <buildCSSFileEntry destPath="bin-debug" sourcePath="src/sexy.css"/>
+  </buildCSSFiles>
 </actionScriptProperties>
