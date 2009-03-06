@@ -1,0 +1,22 @@
+/* Sunshine skin */
+
+.registration .header .logo A          { height: 67px; width: 284px; border: 0px; display: block; text-indent: -9999px; }
+.registration .header .nav UL          { padding-left: 0px; margin: 0px; }
+.registration .header .nav UL LI       { float: left; list-style: none;  }
+.registration .header .nav UL LI A     { display: block; height: 26px; width: 157px; border: 0px; text-indent: -9999px; }
+.registration .main                    { clear: both; height: 276px; width: 786px; position: relative; }
+.registration .main FORM               { position: absolute; top:  77px; left: 106px; height: 116px; }
+.registration .main FORM INPUT         { position: absolute; left: 80px; width: 240px; }
+.registration .main FORM .password     { position: absolute; top:  30px; }
+.registration .main FORM LABEL         { position: absolute; font-family: fantasy, cursive, Comic Sans MS; color: #807C32; margin-top: 4px; }
+.registration .main FORM .submit       { position: absolute; bottom: 30px; }
+.registration .main FORM .submit INPUT { width: 198px; height: 39px; }
+
+.registration .main FORM .submit INPUT      { background: url('../images/sunshine/sunshine_register_btn.gif') no-repeat scroll 0 0; }
+.registration .main                         { background: url('../images/sunshine/sunshine_form_bg.gif')      no-repeat scroll 0 0; }
+.registration .header .logo               A { background: url('../images/sunshine/sunshine_logo.gif')         no-repeat scroll 0 0; }
+.registration .header .nav UL LI.home     A { background: url('../images/sunshine/sunshine_nav_home.gif')     no-repeat scroll 0 0; }
+.registration .header .nav UL LI.about    A { background: url('../images/sunshine/sunshine_nav_about.gif')    no-repeat scroll 0 0; }
+.registration .header .nav UL LI.download A { background: url('../images/sunshine/sunshine_nav_download.gif') no-repeat scroll 0 0; }
+.registration .header .nav UL LI.buy      A { background: url('../images/sunshine/sunshine_nav_buy.gif')      no-repeat scroll 0 0; }
+.registration .header .nav UL LI.help     A { background: url('../images/sunshine/sunshine_nav_help.gif')     no-repeat scroll 0 0; }
