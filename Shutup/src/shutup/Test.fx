@@ -17,7 +17,7 @@ import javafx.scene.transform.Translate;
 import javafx.scene.transform.Transform;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
-import javafx.fxd.UiStub;
+import javafx.fxd.FXDNode;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.scene.input.MouseEvent;
