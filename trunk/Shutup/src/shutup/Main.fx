@@ -18,6 +18,7 @@ import javafx.scene.Group;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.effect.Glow;
+import java.util.Date;
 
 /**
  @todo Buttons
@@ -43,7 +44,7 @@ var player = javafx.scene.media.MediaPlayer{
 
 var formatter = new java.text.SimpleDateFormat("m:ss");
 var left = 0m on replace {
-description = formatter.format(left.toDate());
+description = formatter.format(new Date(left.toMillis()));
 
 };
 var description;
@@ -128,15 +129,16 @@ Stage {
     title: "STFU"
     width: w
     height: h
-    fullScreen: false
+    fullScreen: true
     scene: Scene {
         fill: bind color
         content: [
-            text,
-            startButton,
-            stopButton,
-            resetButton
+            Counter {
+
+            }
+
         ]
+
     }
 }
 
