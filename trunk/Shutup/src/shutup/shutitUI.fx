@@ -9,18 +9,18 @@ package shutup;
 import java.lang.Object;
 import java.lang.System;
 import java.lang.RuntimeException;
-import javafx.fxd.UiStub;
+import javafx.fxd.FXDNode;
+public class shutitUI extends FXDNode {
 
-public class shutitUI extends UiStub {
 
         override public var url = "{__DIR__}shutit.fxz";
 
 
-        override protected function update() {
-                lastNodeId = null;
+        override protected function contentLoaded() {
+                //lastNodeId = null;
                  try {
                 } catch( e:java.lang.Exception) {
-                        System.err.println("Update of the  attribute '{lastNodeId}' failed with: {e}");
+                        System.err.println("Update of the  attribute failed with: {e}");
                         throw e;
                 }
         }
