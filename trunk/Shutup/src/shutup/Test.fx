@@ -1,25 +1,10 @@
-/*
- * Test.fx
- *
- * Created on Mar 2, 2009, 6:50:31 PM
- */
-
 package shutup;
 
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.text.Text;
-import javafx.scene.text.Font;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
-import javafx.scene.Group;
-import javafx.scene.transform.Translate;
-import javafx.scene.transform.Transform;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
-import javafx.fxd.FXDNode;
-import javafx.animation.Timeline;
-import javafx.animation.KeyFrame;
 import javafx.scene.input.MouseEvent;
 
 var player = javafx.scene.media.MediaPlayer {
