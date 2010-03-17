@@ -18,7 +18,7 @@ import javafx.animation.KeyFrame;
  * @author fredriv
  */
 
-var topoffset = 0;
+var topoffset = 0.0;
 var topscale = 1.0 on replace { 
 	topoffset = 100.0 * (1.0 - topscale);
 	urx = 200 + 50 * (1.0 - topscale);
@@ -26,8 +26,8 @@ var topscale = 1.0 on replace {
 };
 var bottomscale = 0.0;
 
-var ulx = 0;
-var urx = 200;
+var ulx = 0.0;
+var urx = 200.0;
 
 var topback = Group {
 	content: Text {
