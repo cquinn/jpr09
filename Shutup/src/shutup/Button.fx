@@ -1,32 +1,17 @@
-/*
-    * Button.fx
-     *
-     * Created on Mar 2, 2009, 2:27:52 PM
-     */
-
 package shutup;
 
 import javafx.scene.CustomNode;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
-import javafx.scene.Group;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.Group;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.effect.Glow;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
-
-/**
-* @author tor
- */
 
 public class Button extends CustomNode {
 

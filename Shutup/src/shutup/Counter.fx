@@ -1,9 +1,3 @@
-/*
- * Counter.fx
- *
- * Created on Mar 2, 2009, 7:18:38 PM
- */
-
 package shutup;
 
 import javafx.scene.Node;
